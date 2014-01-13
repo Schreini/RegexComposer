@@ -48,13 +48,6 @@ namespace RegexComposer
                 var r = new Regex(TxtRegex.Text, options );
                 bool isMatch = r.IsMatch(TxtInput.Text);
 
-                TxtInput.BackColor = isMatch ? Color.Green : Color.FromKnownColor(KnownColor.Window);
-                TxtRegex.BackColor = Color.FromKnownColor(KnownColor.Window);
-                TxtError.Text = string.Empty;
-
-                var replaceWith = Regex.Unescape(TxtReplaceWith.Text);
-                TxtReplaced.Text = r.Replace(TxtInput.Text, replaceWith);
-
                 var sb = new StringBuilder();
                 foreach (Match match in r.Matches(TxtInput.Text))
                 {
@@ -62,6 +55,13 @@ namespace RegexComposer
                                     match.Index, match.Value);
                 }
                 TxtMatches.Text = sb.ToString();
+
+                var replaceWith = Regex.Unescape(TxtReplaceWith.Text);
+                TxtReplaced.Text = r.Replace(TxtInput.Text, replaceWith);
+
+                TxtInput.BackColor = isMatch ? Color.Green : Color.FromKnownColor(KnownColor.Window);
+                TxtRegex.BackColor = Color.FromKnownColor(KnownColor.Window);
+                TxtError.Text = string.Empty;
             }
             catch (Exception ex)
             {
