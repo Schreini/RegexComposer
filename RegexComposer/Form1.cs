@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Drawing;
 using System.Linq;
+using System.Text;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
@@ -45,14 +46,22 @@ namespace RegexComposer
                 }
 
                 var r = new Regex(TxtRegex.Text, options );
-                bool isMatch = r.IsMatch(TxtText.Text);
+                bool isMatch = r.IsMatch(TxtInput.Text);
 
-                TxtText.BackColor = isMatch ? Color.Green : Color.FromKnownColor(KnownColor.Window);
+                TxtInput.BackColor = isMatch ? Color.Green : Color.FromKnownColor(KnownColor.Window);
                 TxtRegex.BackColor = Color.FromKnownColor(KnownColor.Window);
                 TxtError.Text = string.Empty;
 
-                var replaceWith = System.Text.RegularExpressions.Regex.Unescape(TxtReplaceWith.Text);
-                TxtReplaced.Text = r.Replace(TxtText.Text, replaceWith);
+                var replaceWith = Regex.Unescape(TxtReplaceWith.Text);
+                TxtReplaced.Text = r.Replace(TxtInput.Text, replaceWith);
+
+                var sb = new StringBuilder();
+                foreach (Match match in r.Matches(TxtInput.Text))
+                {
+                    sb.AppendFormat("Pos:{0}\r\n{1}\r\n----------------------------------------------\r\n",
+                                    match.Index, match.Value);
+                }
+                TxtMatches.Text = sb.ToString();
             }
             catch (Exception ex)
             {

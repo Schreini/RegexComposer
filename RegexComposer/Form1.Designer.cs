@@ -31,7 +31,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.TxtRegex = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.TxtText = new System.Windows.Forms.TextBox();
+            this.TxtInput = new System.Windows.Forms.TextBox();
             this.ClbRegexOptions = new System.Windows.Forms.CheckedListBox();
             this.label3 = new System.Windows.Forms.Label();
             this.TxtError = new System.Windows.Forms.TextBox();
@@ -41,6 +41,8 @@
             this.label5 = new System.Windows.Forms.Label();
             this.TxtReplaced = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.TxtMatches = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // label1
@@ -72,17 +74,18 @@
             this.label2.TabIndex = 2;
             this.label2.Text = "Input";
             // 
-            // TxtText
+            // TxtInput
             // 
-            this.TxtText.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.TxtInput.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.TxtText.Font = new System.Drawing.Font("Courier New", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TxtText.Location = new System.Drawing.Point(90, 32);
-            this.TxtText.Multiline = true;
-            this.TxtText.Name = "TxtText";
-            this.TxtText.Size = new System.Drawing.Size(719, 116);
-            this.TxtText.TabIndex = 3;
-            this.TxtText.TextChanged += new System.EventHandler(this.TxtText_TextChanged);
+            this.TxtInput.Font = new System.Drawing.Font("Courier New", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TxtInput.Location = new System.Drawing.Point(90, 32);
+            this.TxtInput.Multiline = true;
+            this.TxtInput.Name = "TxtInput";
+            this.TxtInput.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.TxtInput.Size = new System.Drawing.Size(719, 116);
+            this.TxtInput.TabIndex = 3;
+            this.TxtInput.TextChanged += new System.EventHandler(this.TxtText_TextChanged);
             // 
             // ClbRegexOptions
             // 
@@ -100,7 +103,7 @@
             // 
             this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(13, 309);
+            this.label3.Location = new System.Drawing.Point(13, 534);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(29, 13);
             this.label3.TabIndex = 5;
@@ -111,7 +114,7 @@
             this.TxtError.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.TxtError.HideSelection = false;
-            this.TxtError.Location = new System.Drawing.Point(90, 302);
+            this.TxtError.Location = new System.Drawing.Point(90, 527);
             this.TxtError.Name = "TxtError";
             this.TxtError.ReadOnly = true;
             this.TxtError.Size = new System.Drawing.Size(889, 20);
@@ -136,17 +139,18 @@
             this.TxtHelp.Multiline = true;
             this.TxtHelp.Name = "TxtHelp";
             this.TxtHelp.ReadOnly = true;
-            this.TxtHelp.Size = new System.Drawing.Size(164, 141);
+            this.TxtHelp.Size = new System.Drawing.Size(164, 366);
             this.TxtHelp.TabIndex = 8;
             this.TxtHelp.Text = "Multiline: \r\n^ und $ matchen Zeilenanfang und Ende und nicht mehr Text Anfang und" +
-    " Ende\r\n\r\nSingleline:\r\n. (Punkt) matcht auch \\n";
+    " Ende\r\n\r\nSingleline:\r\n. (Punkt) matcht auch \\n\r\n\r\nReplace With Text wird Unescap" +
+    "ed -> \\r\\n ergibt ein Newline\r\n";
             // 
             // TxtReplaceWith
             // 
             this.TxtReplaceWith.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.TxtReplaceWith.Font = new System.Drawing.Font("Courier New", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TxtReplaceWith.Location = new System.Drawing.Point(90, 154);
+            this.TxtReplaceWith.Location = new System.Drawing.Point(90, 281);
             this.TxtReplaceWith.Name = "TxtReplaceWith";
             this.TxtReplaceWith.Size = new System.Drawing.Size(719, 20);
             this.TxtReplaceWith.TabIndex = 9;
@@ -155,7 +159,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(13, 158);
+            this.label5.Location = new System.Drawing.Point(13, 285);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(69, 13);
             this.label5.TabIndex = 10;
@@ -167,27 +171,53 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.TxtReplaced.Font = new System.Drawing.Font("Courier New", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TxtReplaced.HideSelection = false;
-            this.TxtReplaced.Location = new System.Drawing.Point(90, 180);
+            this.TxtReplaced.Location = new System.Drawing.Point(90, 307);
             this.TxtReplaced.Multiline = true;
             this.TxtReplaced.Name = "TxtReplaced";
             this.TxtReplaced.ReadOnly = true;
-            this.TxtReplaced.Size = new System.Drawing.Size(719, 116);
+            this.TxtReplaced.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.TxtReplaced.Size = new System.Drawing.Size(719, 115);
             this.TxtReplaced.TabIndex = 11;
             // 
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(13, 183);
+            this.label6.Location = new System.Drawing.Point(13, 310);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(53, 13);
             this.label6.TabIndex = 12;
             this.label6.Text = "Replaced";
             // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(13, 158);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(48, 13);
+            this.label7.TabIndex = 13;
+            this.label7.Text = "Matches";
+            // 
+            // TxtMatches
+            // 
+            this.TxtMatches.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.TxtMatches.Font = new System.Drawing.Font("Courier New", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TxtMatches.HideSelection = false;
+            this.TxtMatches.Location = new System.Drawing.Point(90, 158);
+            this.TxtMatches.Multiline = true;
+            this.TxtMatches.Name = "TxtMatches";
+            this.TxtMatches.ReadOnly = true;
+            this.TxtMatches.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.TxtMatches.Size = new System.Drawing.Size(719, 116);
+            this.TxtMatches.TabIndex = 14;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(991, 331);
+            this.ClientSize = new System.Drawing.Size(991, 556);
+            this.Controls.Add(this.TxtMatches);
+            this.Controls.Add(this.label7);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.TxtReplaced);
             this.Controls.Add(this.label5);
@@ -197,7 +227,7 @@
             this.Controls.Add(this.TxtError);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.ClbRegexOptions);
-            this.Controls.Add(this.TxtText);
+            this.Controls.Add(this.TxtInput);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.TxtRegex);
             this.Controls.Add(this.label1);
@@ -213,7 +243,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox TxtRegex;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox TxtText;
+        private System.Windows.Forms.TextBox TxtInput;
         private System.Windows.Forms.CheckedListBox ClbRegexOptions;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox TxtError;
@@ -223,6 +253,8 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TextBox TxtReplaced;
         private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.TextBox TxtMatches;
     }
 }
 
