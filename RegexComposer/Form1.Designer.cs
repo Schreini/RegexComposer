@@ -29,9 +29,9 @@
         private void InitializeComponent()
         {
             this.label1 = new System.Windows.Forms.Label();
-            this.txtRegex = new System.Windows.Forms.TextBox();
+            this.TxtRegex = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.txtText = new System.Windows.Forms.TextBox();
+            this.TxtText = new System.Windows.Forms.TextBox();
             this.ClbRegexOptions = new System.Windows.Forms.CheckedListBox();
             this.label3 = new System.Windows.Forms.Label();
             this.TxtError = new System.Windows.Forms.TextBox();
@@ -48,15 +48,15 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "Regex";
             // 
-            // txtRegex
+            // TxtRegex
             // 
-            this.txtRegex.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.TxtRegex.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtRegex.Location = new System.Drawing.Point(90, 5);
-            this.txtRegex.Name = "txtRegex";
-            this.txtRegex.Size = new System.Drawing.Size(719, 20);
-            this.txtRegex.TabIndex = 1;
-            this.txtRegex.TextChanged += new System.EventHandler(this.txtRegex_TextChanged);
+            this.TxtRegex.Location = new System.Drawing.Point(90, 5);
+            this.TxtRegex.Name = "TxtRegex";
+            this.TxtRegex.Size = new System.Drawing.Size(719, 20);
+            this.TxtRegex.TabIndex = 1;
+            this.TxtRegex.TextChanged += new System.EventHandler(this.TxtRegex_TextChanged);
             // 
             // label2
             // 
@@ -67,17 +67,17 @@
             this.label2.TabIndex = 2;
             this.label2.Text = "Text";
             // 
-            // txtText
+            // TxtText
             // 
-            this.txtText.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.TxtText.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtText.Location = new System.Drawing.Point(90, 32);
-            this.txtText.Multiline = true;
-            this.txtText.Name = "txtText";
-            this.txtText.Size = new System.Drawing.Size(719, 358);
-            this.txtText.TabIndex = 3;
-            this.txtText.TextChanged += new System.EventHandler(this.txtText_TextChanged);
+            this.TxtText.Location = new System.Drawing.Point(90, 32);
+            this.TxtText.Multiline = true;
+            this.TxtText.Name = "TxtText";
+            this.TxtText.Size = new System.Drawing.Size(719, 358);
+            this.TxtText.TabIndex = 3;
+            this.TxtText.TextChanged += new System.EventHandler(this.TxtText_TextChanged);
             // 
             // ClbRegexOptions
             // 
@@ -145,9 +145,9 @@
             this.Controls.Add(this.TxtError);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.ClbRegexOptions);
-            this.Controls.Add(this.txtText);
+            this.Controls.Add(this.TxtText);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.txtRegex);
+            this.Controls.Add(this.TxtRegex);
             this.Controls.Add(this.label1);
             this.Name = "Form1";
             this.Text = "Form1";
@@ -159,9 +159,9 @@
         #endregion
 
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox txtRegex;
+        private System.Windows.Forms.TextBox TxtRegex;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox txtText;
+        private System.Windows.Forms.TextBox TxtText;
         private System.Windows.Forms.CheckedListBox ClbRegexOptions;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox TxtError;

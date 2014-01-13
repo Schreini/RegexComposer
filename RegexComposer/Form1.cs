@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
@@ -25,18 +21,6 @@ namespace RegexComposer
 
         }
 
-        private void txtRegex_TextChanged(object sender, EventArgs e)
-        {
-            ReMatchRegex();
-        }
-
-        private void txtText_TextChanged(object sender, EventArgs e)
-        {
-            ReMatchRegex();
-        }
-
-
-
         private void ReMatchRegex()
         {
             try
@@ -56,14 +40,14 @@ namespace RegexComposer
                     }
                 }
 
-                var r = new Regex(txtRegex.Text, options );
-                bool isMatch = r.IsMatch(txtText.Text);
-                txtText.BackColor = isMatch ? Color.Green : Color.FromKnownColor(KnownColor.Window);
-                txtRegex.BackColor = Color.FromKnownColor(KnownColor.Window);
+                var r = new Regex(TxtRegex.Text, options );
+                bool isMatch = r.IsMatch(TxtText.Text);
+                TxtText.BackColor = isMatch ? Color.Green : Color.FromKnownColor(KnownColor.Window);
+                TxtRegex.BackColor = Color.FromKnownColor(KnownColor.Window);
             }
             catch (Exception ex)
             {
-                txtRegex.BackColor = Color.PaleVioletRed;
+                TxtRegex.BackColor = Color.PaleVioletRed;
                 TxtError.Text = ex.Message;
             }
         }
@@ -72,6 +56,16 @@ namespace RegexComposer
         {
             //wird als letztes Event in die eventloop geängt. Dann ist die CheckedItems Collection korrekt gefüllt
             BeginInvoke((MethodInvoker)ReMatchRegex);
+        }
+
+        private void TxtRegex_TextChanged(object sender, EventArgs e)
+        {
+            ReMatchRegex();
+        }
+
+        private void TxtText_TextChanged(object sender, EventArgs e)
+        {
+            ReMatchRegex();
         }
     }
 
