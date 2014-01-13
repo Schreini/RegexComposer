@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -51,8 +52,21 @@ namespace RegexComposer
                 var sb = new StringBuilder();
                 foreach (Match match in r.Matches(TxtInput.Text))
                 {
-                    sb.AppendFormat("Pos:{0}\r\n{1}\r\n----------------------------------------------\r\n",
-                                    match.Index, match.Value);
+//                    var enumerable = match.Groups.Cast<Group>().Select(g=>g.Captures);
+                    var groups = new StringBuilder();
+                    foreach (var group in match.Groups.Cast<Group>())
+                    {
+                        groups.AppendFormat("[Group|Success:{0};Length:{1};Index:{2};Value:{3}\r\n", group.Success,
+                                            group.Length, group.Index, group.Value);
+                        foreach (Capture capture in group.Captures)
+                        {
+                            groups.AppendFormat("\tCapture|Length:{0};Index:{1};Value:{2}]\r\n", 
+                                                capture.Length, capture.Index, capture.Value);
+                        }
+                        groups.Append("]\r\n");
+                    }
+                    sb.AppendFormat("Pos:{0}; Groups:{1};\r\n{2}\r\n----------------------------------------------\r\n",
+                                    match.Index, groups, match.Value);
                 }
                 TxtMatches.Text = sb.ToString();
 
