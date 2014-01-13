@@ -37,6 +37,10 @@
             this.TxtError = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.TxtHelp = new System.Windows.Forms.TextBox();
+            this.TxtReplaceWith = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.TxtReplaced = new System.Windows.Forms.TextBox();
+            this.label6 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label1
@@ -52,6 +56,7 @@
             // 
             this.TxtRegex.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.TxtRegex.Font = new System.Drawing.Font("Courier New", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TxtRegex.Location = new System.Drawing.Point(90, 5);
             this.TxtRegex.Name = "TxtRegex";
             this.TxtRegex.Size = new System.Drawing.Size(719, 20);
@@ -63,19 +68,19 @@
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(13, 35);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(28, 13);
+            this.label2.Size = new System.Drawing.Size(31, 13);
             this.label2.TabIndex = 2;
-            this.label2.Text = "Text";
+            this.label2.Text = "Input";
             // 
             // TxtText
             // 
-            this.TxtText.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            this.TxtText.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.TxtText.Font = new System.Drawing.Font("Courier New", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TxtText.Location = new System.Drawing.Point(90, 32);
             this.TxtText.Multiline = true;
             this.TxtText.Name = "TxtText";
-            this.TxtText.Size = new System.Drawing.Size(719, 358);
+            this.TxtText.Size = new System.Drawing.Size(719, 116);
             this.TxtText.TabIndex = 3;
             this.TxtText.TextChanged += new System.EventHandler(this.TxtText_TextChanged);
             // 
@@ -95,7 +100,7 @@
             // 
             this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(13, 403);
+            this.label3.Location = new System.Drawing.Point(13, 309);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(29, 13);
             this.label3.TabIndex = 5;
@@ -103,9 +108,10 @@
             // 
             // TxtError
             // 
-            this.TxtError.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.TxtError.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.TxtError.HideSelection = false;
-            this.TxtError.Location = new System.Drawing.Point(90, 396);
+            this.TxtError.Location = new System.Drawing.Point(90, 302);
             this.TxtError.Name = "TxtError";
             this.TxtError.ReadOnly = true;
             this.TxtError.Size = new System.Drawing.Size(889, 20);
@@ -130,16 +136,62 @@
             this.TxtHelp.Multiline = true;
             this.TxtHelp.Name = "TxtHelp";
             this.TxtHelp.ReadOnly = true;
-            this.TxtHelp.Size = new System.Drawing.Size(164, 235);
+            this.TxtHelp.Size = new System.Drawing.Size(164, 141);
             this.TxtHelp.TabIndex = 8;
             this.TxtHelp.Text = "Multiline: \r\n^ und $ matchen Zeilenanfang und Ende und nicht mehr Text Anfang und" +
     " Ende\r\n\r\nSingleline:\r\n. (Punkt) matcht auch \\n";
+            // 
+            // TxtReplaceWith
+            // 
+            this.TxtReplaceWith.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.TxtReplaceWith.Font = new System.Drawing.Font("Courier New", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TxtReplaceWith.Location = new System.Drawing.Point(90, 154);
+            this.TxtReplaceWith.Name = "TxtReplaceWith";
+            this.TxtReplaceWith.Size = new System.Drawing.Size(719, 20);
+            this.TxtReplaceWith.TabIndex = 9;
+            this.TxtReplaceWith.TextChanged += new System.EventHandler(this.TxtReplaceWith_TextChanged);
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(13, 158);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(69, 13);
+            this.label5.TabIndex = 10;
+            this.label5.Text = "Replace with";
+            // 
+            // TxtReplaced
+            // 
+            this.TxtReplaced.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.TxtReplaced.Font = new System.Drawing.Font("Courier New", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TxtReplaced.HideSelection = false;
+            this.TxtReplaced.Location = new System.Drawing.Point(90, 180);
+            this.TxtReplaced.Multiline = true;
+            this.TxtReplaced.Name = "TxtReplaced";
+            this.TxtReplaced.ReadOnly = true;
+            this.TxtReplaced.Size = new System.Drawing.Size(719, 116);
+            this.TxtReplaced.TabIndex = 11;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(13, 183);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(53, 13);
+            this.label6.TabIndex = 12;
+            this.label6.Text = "Replaced";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(991, 425);
+            this.ClientSize = new System.Drawing.Size(991, 331);
+            this.Controls.Add(this.label6);
+            this.Controls.Add(this.TxtReplaced);
+            this.Controls.Add(this.label5);
+            this.Controls.Add(this.TxtReplaceWith);
             this.Controls.Add(this.TxtHelp);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.TxtError);
@@ -167,6 +219,10 @@
         private System.Windows.Forms.TextBox TxtError;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox TxtHelp;
+        private System.Windows.Forms.TextBox TxtReplaceWith;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.TextBox TxtReplaced;
+        private System.Windows.Forms.Label label6;
     }
 }
 

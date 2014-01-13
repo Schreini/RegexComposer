@@ -21,11 +21,15 @@ namespace RegexComposer
 
         }
 
+        private void ReEvaluateForm()
+        {
+            ReMatchRegex();
+        }
+
         private void ReMatchRegex()
         {
             try
             {
-                
                 var selectedOptions = ClbRegexOptions.CheckedItems.Cast<RegexOptionListBoxItem>().Select(i => i.Option);
                 RegexOptions options = RegexOptions.None;
                 
@@ -42,8 +46,13 @@ namespace RegexComposer
 
                 var r = new Regex(TxtRegex.Text, options );
                 bool isMatch = r.IsMatch(TxtText.Text);
+
                 TxtText.BackColor = isMatch ? Color.Green : Color.FromKnownColor(KnownColor.Window);
                 TxtRegex.BackColor = Color.FromKnownColor(KnownColor.Window);
+                TxtError.Text = string.Empty;
+
+                var replaceWith = System.Text.RegularExpressions.Regex.Unescape(TxtReplaceWith.Text);
+                TxtReplaced.Text = r.Replace(TxtText.Text, replaceWith);
             }
             catch (Exception ex)
             {
@@ -55,17 +64,22 @@ namespace RegexComposer
         private void ClbRegexOptions_ItemCheck(object sender, ItemCheckEventArgs e)
         {
             //wird als letztes Event in die eventloop geängt. Dann ist die CheckedItems Collection korrekt gefüllt
-            BeginInvoke((MethodInvoker)ReMatchRegex);
+            BeginInvoke((MethodInvoker)ReEvaluateForm);
         }
 
         private void TxtRegex_TextChanged(object sender, EventArgs e)
         {
-            ReMatchRegex();
+            ReEvaluateForm();
         }
 
         private void TxtText_TextChanged(object sender, EventArgs e)
         {
-            ReMatchRegex();
+            ReEvaluateForm();
+        }
+
+        private void TxtReplaceWith_TextChanged(object sender, EventArgs e)
+        {
+            ReEvaluateForm();
         }
     }
 
