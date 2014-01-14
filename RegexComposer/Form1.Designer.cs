@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.label1 = new System.Windows.Forms.Label();
             this.TxtRegex = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
@@ -43,7 +44,6 @@
             this.TxtReplaced = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
-            this.TxtMatches = new System.Windows.Forms.TextBox();
             this.GrdMatches = new System.Windows.Forms.DataGridView();
             this.MatchesBindingSource = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.GrdMatches)).BeginInit();
@@ -197,25 +197,11 @@
             // 
             this.label7.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(13, 567);
+            this.label7.Location = new System.Drawing.Point(13, 303);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(48, 13);
             this.label7.TabIndex = 13;
             this.label7.Text = "Matches";
-            // 
-            // TxtMatches
-            // 
-            this.TxtMatches.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.TxtMatches.Font = new System.Drawing.Font("Courier New", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TxtMatches.HideSelection = false;
-            this.TxtMatches.Location = new System.Drawing.Point(90, 567);
-            this.TxtMatches.Multiline = true;
-            this.TxtMatches.Name = "TxtMatches";
-            this.TxtMatches.ReadOnly = true;
-            this.TxtMatches.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.TxtMatches.Size = new System.Drawing.Size(729, 51);
-            this.TxtMatches.TabIndex = 14;
             // 
             // GrdMatches
             // 
@@ -226,12 +212,22 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.GrdMatches.AutoGenerateColumns = false;
+            this.GrdMatches.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+            this.GrdMatches.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.GrdMatches.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.GrdMatches.DataSource = this.MatchesBindingSource;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Courier New", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.GrdMatches.DefaultCellStyle = dataGridViewCellStyle1;
             this.GrdMatches.Location = new System.Drawing.Point(90, 303);
             this.GrdMatches.Name = "GrdMatches";
             this.GrdMatches.ReadOnly = true;
-            this.GrdMatches.Size = new System.Drawing.Size(729, 258);
+            this.GrdMatches.Size = new System.Drawing.Size(729, 315);
             this.GrdMatches.TabIndex = 15;
             // 
             // Form1
@@ -240,7 +236,6 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1001, 653);
             this.Controls.Add(this.GrdMatches);
-            this.Controls.Add(this.TxtMatches);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.TxtReplaced);
@@ -280,7 +275,6 @@
         private System.Windows.Forms.TextBox TxtReplaced;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.TextBox TxtMatches;
         private System.Windows.Forms.DataGridView GrdMatches;
         private System.Windows.Forms.BindingSource MatchesBindingSource;
     }
