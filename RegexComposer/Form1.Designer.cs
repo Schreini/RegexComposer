@@ -29,9 +29,10 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.label1 = new System.Windows.Forms.Label();
             this.TxtRegex = new System.Windows.Forms.TextBox();
+            this.CmsRegex = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.label2 = new System.Windows.Forms.Label();
             this.TxtInput = new System.Windows.Forms.TextBox();
             this.ClbRegexOptions = new System.Windows.Forms.CheckedListBox();
@@ -50,7 +51,7 @@
             this.BtnRegexInsert = new System.Windows.Forms.Button();
             this.BtnReplaceInsert = new System.Windows.Forms.Button();
             this.SpcMainMatches = new System.Windows.Forms.SplitContainer();
-            this.CmsRegexInsert = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.CmsReplaceWith = new System.Windows.Forms.ContextMenuStrip(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.GrdMatches)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.MatchesBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.SpcRegexReplace)).BeginInit();
@@ -76,7 +77,7 @@
             // 
             this.TxtRegex.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.TxtRegex.ContextMenuStrip = this.CmsRegexInsert;
+            this.TxtRegex.ContextMenuStrip = this.CmsRegex;
             this.TxtRegex.Font = new System.Drawing.Font("Courier New", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TxtRegex.HideSelection = false;
             this.TxtRegex.Location = new System.Drawing.Point(47, 0);
@@ -84,6 +85,12 @@
             this.TxtRegex.Size = new System.Drawing.Size(363, 20);
             this.TxtRegex.TabIndex = 0;
             this.TxtRegex.TextChanged += new System.EventHandler(this.TxtRegex_TextChanged);
+            // 
+            // CmsRegex
+            // 
+            this.CmsRegex.Name = "CmsRegexInsert";
+            this.CmsRegex.ShowImageMargin = false;
+            this.CmsRegex.Size = new System.Drawing.Size(36, 4);
             // 
             // label2
             // 
@@ -169,6 +176,7 @@
             // 
             this.TxtReplaceWith.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.TxtReplaceWith.ContextMenuStrip = this.CmsReplaceWith;
             this.TxtReplaceWith.Font = new System.Drawing.Font("Courier New", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TxtReplaceWith.HideSelection = false;
             this.TxtReplaceWith.Location = new System.Drawing.Point(78, 0);
@@ -232,14 +240,14 @@
             this.GrdMatches.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.GrdMatches.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.GrdMatches.DataSource = this.MatchesBindingSource;
-            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle10.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle10.Font = new System.Drawing.Font("Courier New", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle10.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle10.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle10.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle10.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.GrdMatches.DefaultCellStyle = dataGridViewCellStyle10;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Courier New", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.GrdMatches.DefaultCellStyle = dataGridViewCellStyle3;
             this.GrdMatches.Location = new System.Drawing.Point(78, 3);
             this.GrdMatches.Name = "GrdMatches";
             this.GrdMatches.ReadOnly = true;
@@ -297,6 +305,7 @@
             this.BtnReplaceInsert.TabIndex = 4;
             this.BtnReplaceInsert.Text = "...";
             this.BtnReplaceInsert.UseVisualStyleBackColor = true;
+            this.BtnReplaceInsert.Click += new System.EventHandler(this.BtnReplaceInsert_Click);
             // 
             // SpcMainMatches
             // 
@@ -326,11 +335,10 @@
             this.SpcMainMatches.MouseMove += new System.Windows.Forms.MouseEventHandler(this.SpcRegexReplace_MouseMove);
             this.SpcMainMatches.MouseUp += new System.Windows.Forms.MouseEventHandler(this.SpcRegexReplace_MouseUp);
             // 
-            // CmsRegexInsert
+            // CmsReplaceWith
             // 
-            this.CmsRegexInsert.Name = "CmsRegexInsert";
-            this.CmsRegexInsert.ShowImageMargin = false;
-            this.CmsRegexInsert.Size = new System.Drawing.Size(36, 4);
+            this.CmsReplaceWith.Name = "CmsReplaceWith";
+            this.CmsReplaceWith.Size = new System.Drawing.Size(61, 4);
             // 
             // Form1
             // 
@@ -383,7 +391,8 @@
         private System.Windows.Forms.SplitContainer SpcMainMatches;
         private System.Windows.Forms.Button BtnRegexInsert;
         private System.Windows.Forms.Button BtnReplaceInsert;
-        private System.Windows.Forms.ContextMenuStrip CmsRegexInsert;
+        private System.Windows.Forms.ContextMenuStrip CmsRegex;
+        private System.Windows.Forms.ContextMenuStrip CmsReplaceWith;
     }
 }
 

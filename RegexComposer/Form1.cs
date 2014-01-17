@@ -20,7 +20,7 @@ namespace RegexComposer
                                                    new RegexOptionListBoxItem(RegexOptions.Multiline),
                                                    new RegexOptionListBoxItem(RegexOptions.IgnoreCase),
                                                });
-            RebuildRegexInsertMenu();
+            RebuildContextMenuStrips();
         }
 
         private void ReEvaluateForm()
@@ -223,18 +223,30 @@ namespace RegexComposer
         private void BtnRegexInsert_Click(object sender, EventArgs e)
         {
             var btn = (Button) sender;
-            RebuildRegexInsertMenu();
-            CmsRegexInsert.Show(btn, new Point(0, btn.Height));
+            RebuildContextMenuStrips();
+            CmsRegex.Show(btn, new Point(0, btn.Height));
         }
 
-        private void RebuildRegexInsertMenu()
+        private void BtnReplaceInsert_Click(object sender, EventArgs e)
         {
-            CmsRegexInsert.Items.Clear();
-            CmsRegexInsert.Items.Add(new ToolStripMenuItem("Insert numbered group", null, (sender, e) => ReplaceSelection(TxtRegex, "(", ")"), Keys.Control | Keys.G));
-            CmsRegexInsert.Items.Add(new ToolStripMenuItem("Insert named group", null, (sender, e) => ReplaceSelection(TxtRegex, "(?<>", ")", 3), Keys.Control | Keys.Shift | Keys.G));
-            CmsRegexInsert.Items.Add(new ToolStripSeparator());
-            CmsRegexInsert.Items.Add(new ToolStripMenuItem("Insert numbered backreference", null, (sender, e) => ReplaceSelection(TxtRegex, @"\1", "", 1, 1)));
-            CmsRegexInsert.Items.Add(new ToolStripMenuItem("Insert named backreference", null, (sender, e) => ReplaceSelection(TxtRegex, @"\k<", ">", 3)));
+            var btn = (Button)sender;
+            RebuildContextMenuStrips();
+            CmsReplaceWith.Show(btn, new Point(0, btn.Height));
+        }
+
+
+        private void RebuildContextMenuStrips()
+        {
+            CmsRegex.Items.Clear();
+            CmsRegex.Items.Add(new ToolStripMenuItem("Group (numbered)", null, (sender, e) => ReplaceSelection(TxtRegex, "(", ")"), Keys.Control | Keys.G));
+            CmsRegex.Items.Add(new ToolStripMenuItem("Group (named)", null, (sender, e) => ReplaceSelection(TxtRegex, "(?<>", ")", 3), Keys.Control | Keys.Shift | Keys.G));
+            CmsRegex.Items.Add(new ToolStripSeparator());
+            CmsRegex.Items.Add(new ToolStripMenuItem("Backreference (numbered)", null, (sender, e) => ReplaceSelection(TxtRegex, @"\1", "", 1, 1)));
+            CmsRegex.Items.Add(new ToolStripMenuItem("Backreference (named)", null, (sender, e) => ReplaceSelection(TxtRegex, @"\k<", ">", 3)));
+
+            CmsReplaceWith.Items.Clear();
+            CmsReplaceWith.Items.Add(new ToolStripMenuItem("Substitution (numbered)", null, (sender, e) => ReplaceSelection(TxtReplaceWith, "$1", "", 1, 1), Keys.Control | Keys.S));
+            CmsReplaceWith.Items.Add(new ToolStripMenuItem("Substitution (named)", null, (sender, e) => ReplaceSelection(TxtReplaceWith, "${}", "", 2), Keys.Control | Keys.Shift | Keys.S));
         }
 
         private void ReplaceSelection(TextBox textBox, string left, string right, int selStart = 0, int selLength = 0)
