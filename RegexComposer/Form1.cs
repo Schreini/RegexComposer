@@ -20,7 +20,7 @@ namespace RegexComposer
                                                    new RegexOptionListBoxItem(RegexOptions.Multiline),
                                                    new RegexOptionListBoxItem(RegexOptions.IgnoreCase),
                                                });
-
+            RebuildRegexInsertMenu();
         }
 
         private void ReEvaluateForm()
@@ -54,13 +54,14 @@ namespace RegexComposer
                 var replaceWith = Regex.Unescape(TxtReplaceWith.Text);
                 TxtReplaced.Text = r.Replace(TxtInput.Text, replaceWith);
 
-                TxtInput.BackColor = isMatch ? Color.Green : Color.FromKnownColor(KnownColor.Window);
-                TxtRegex.BackColor = Color.FromKnownColor(KnownColor.Window);
+                var isMatchColor = Color.LightGreen;
+                TxtRegex.BackColor = isMatch ? isMatchColor : Color.FromKnownColor(KnownColor.Window);
                 TxtError.Text = string.Empty;
             }
             catch (Exception ex)
             {
-                TxtRegex.BackColor = Color.PaleVioletRed;
+                var errorColor = Color.FromArgb(255, 255, 199, 206);
+                TxtRegex.BackColor = errorColor;
                 TxtError.Text = ex.Message;
             }
         }
@@ -217,6 +218,44 @@ namespace RegexComposer
                     container.IsSplitterFixed = false;
                 }
             }
+        }
+
+        private void BtnRegexInsert_Click(object sender, EventArgs e)
+        {
+            var btn = (Button) sender;
+            RebuildRegexInsertMenu();
+            CmsRegexInsert.Show(btn, new Point(0, btn.Height));
+        }
+
+        private void RebuildRegexInsertMenu()
+        {
+            CmsRegexInsert.Items.Clear();
+            CmsRegexInsert.Items.Add(new ToolStripMenuItem("Insert numbered group", null, (sender, e) => ReplaceSelection(TxtRegex, "(", ")"), Keys.Control | Keys.G));
+            CmsRegexInsert.Items.Add(new ToolStripMenuItem("Insert named group", null, (sender, e) => ReplaceSelection(TxtRegex, "(?<>", ")", 3), Keys.Control | Keys.Shift | Keys.G));
+            CmsRegexInsert.Items.Add(new ToolStripSeparator());
+            CmsRegexInsert.Items.Add(new ToolStripMenuItem("Insert numbered backreference", null, (sender, e) => ReplaceSelection(TxtRegex, @"\1", "", 1, 1)));
+            CmsRegexInsert.Items.Add(new ToolStripMenuItem("Insert named backreference", null, (sender, e) => ReplaceSelection(TxtRegex, @"\k<", ">", 3)));
+        }
+
+        private void ReplaceSelection(TextBox textBox, string left, string right, int selStart = 0, int selLength = 0)
+        {
+            string txt = textBox.Text;
+            var selectionStart = textBox.SelectionStart;
+            var selectionLength = textBox.SelectionLength;
+            //reihenfolge hier ist wichtig. zuerst rechts einfügen, dann links; sonst wird das Ende verschoben
+            txt = txt.Insert(selectionStart + selectionLength, right);
+            txt = txt.Insert(selectionStart, left);
+            textBox.Text = txt;
+            if (selStart == 0)
+            {
+                textBox.SelectionStart = selectionStart + selectionLength + left.Length + right.Length;
+            }
+            else
+            {
+                textBox.SelectionStart = selectionStart + selStart;
+            }
+            textBox.SelectionLength = selLength;
+            textBox.Focus();
         }
     }
 
