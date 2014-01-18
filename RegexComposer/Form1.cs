@@ -95,6 +95,76 @@ namespace RegexComposer
             MatchesBindingSource.DataSource = dt;
         }
 
+        private void RebuildContextMenuStrips()
+        {
+            CmsRegex.Items.Clear();
+            CmsRegex.Items.Add(new ToolStripMenuItem("Group (numbered)", null, (sender, e) => ReplaceSelection(TxtRegex, "(", ")"), Keys.Control | Keys.G));
+            CmsRegex.Items.Add(new ToolStripMenuItem("Group (named)", null, (sender, e) => ReplaceSelection(TxtRegex, "(?<>", ")", 3), Keys.Control | Keys.Shift | Keys.G));
+            CmsRegex.Items.Add(new ToolStripSeparator());
+            CmsRegex.Items.Add(new ToolStripMenuItem("Backreference (numbered)", null, (sender, e) => ReplaceSelection(TxtRegex, @"\1", "", 1, 1), Keys.Control | Keys.B));
+            CmsRegex.Items.Add(new ToolStripMenuItem("Backreference (named)", null, (sender, e) => ReplaceSelection(TxtRegex, @"\k<", ">", 3), Keys.Control | Keys.Shift | Keys.B));
+
+            CmsReplaceWith.Items.Clear();
+            CmsReplaceWith.Items.Add(new ToolStripMenuItem("Substitution (numbered)", null, (sender, e) => ReplaceSelection(TxtReplaceWith, "$1", "", 1, 1), Keys.Control | Keys.S));
+            CmsReplaceWith.Items.Add(new ToolStripMenuItem("Substitution (named)", null, (sender, e) => ReplaceSelection(TxtReplaceWith, "${}", "", 2), Keys.Control | Keys.Shift | Keys.S));
+            AddDynamicContextMenuItems();
+        }
+
+        private void AddDynamicContextMenuItems()
+        {
+            //(\([^()?]*\))
+            var numberedGroupRegex = new Regex(@"(\([^()?]*\))");
+            int numberedMatchesCount = numberedGroupRegex.Matches(TxtRegex.Text).Count;
+            if (numberedMatchesCount > 0)
+            {
+                CmsRegex.Items.Add(new ToolStripSeparator());
+                CmsReplaceWith.Items.Add(new ToolStripSeparator());
+            }
+
+            for (int m = 1; m <= numberedMatchesCount; m++)
+            {
+                int number = m;
+                CmsRegex.Items.Add(new ToolStripMenuItem("Backreference " + number, null, (sender, e) => ReplaceSelection(TxtRegex, @"\" + number, "", 1, 1)));
+                CmsReplaceWith.Items.Add(new ToolStripMenuItem("Substitution " + number, null, (sender, e) => ReplaceSelection(TxtReplaceWith, "$" + number, "", 2)));
+            }
+            //(\(\?<(?<name>[^>]+)>[^()]*\))
+            var namedGroupRegex = new Regex(@"(\(\?<(?<name>[^>]+)>[^()]*\))");
+            var namedMatches = namedGroupRegex.Matches(TxtRegex.Text);
+            if (namedMatches.Count > 0)
+            {
+                CmsRegex.Items.Add(new ToolStripSeparator());
+                CmsReplaceWith.Items.Add(new ToolStripSeparator());
+            }
+
+            foreach (Match match in namedMatches)
+            {
+                var name = match.Groups["name"];
+                CmsRegex.Items.Add(new ToolStripMenuItem("Backreference " + name, null, (sender, e) => ReplaceSelection(TxtRegex, @"\k<" + name, ">", 4 + name.Length)));
+                CmsReplaceWith.Items.Add(new ToolStripMenuItem("Substitution " + name, null, (sender, e) => ReplaceSelection(TxtReplaceWith, "${" + name, "}", 2)));
+            }
+        }
+
+        private void ReplaceSelection(TextBox textBox, string left, string right, int selStart = 0, int selLength = 0)
+        {
+            string txt = textBox.Text;
+            var selectionStart = textBox.SelectionStart;
+            var selectionLength = textBox.SelectionLength;
+            //reihenfolge hier ist wichtig. zuerst rechts einfügen, dann links; sonst wird das Ende verschoben
+            txt = txt.Insert(selectionStart + selectionLength, right);
+            txt = txt.Insert(selectionStart, left);
+            textBox.Text = txt;
+            if (selStart == 0)
+            {
+                textBox.SelectionStart = selectionStart + selectionLength + left.Length + right.Length;
+            }
+            else
+            {
+                textBox.SelectionStart = selectionStart + selStart;
+            }
+            textBox.SelectionLength = selLength;
+            textBox.Focus();
+        }
+
         private void ClbRegexOptions_ItemCheck(object sender, ItemCheckEventArgs e)
         {
             //wird als letztes Event in die eventloop geängt. Dann ist die CheckedItems Collection korrekt gefüllt
@@ -232,42 +302,6 @@ namespace RegexComposer
             var btn = (Button)sender;
             RebuildContextMenuStrips();
             CmsReplaceWith.Show(btn, new Point(0, btn.Height));
-        }
-
-
-        private void RebuildContextMenuStrips()
-        {
-            CmsRegex.Items.Clear();
-            CmsRegex.Items.Add(new ToolStripMenuItem("Group (numbered)", null, (sender, e) => ReplaceSelection(TxtRegex, "(", ")"), Keys.Control | Keys.G));
-            CmsRegex.Items.Add(new ToolStripMenuItem("Group (named)", null, (sender, e) => ReplaceSelection(TxtRegex, "(?<>", ")", 3), Keys.Control | Keys.Shift | Keys.G));
-            CmsRegex.Items.Add(new ToolStripSeparator());
-            CmsRegex.Items.Add(new ToolStripMenuItem("Backreference (numbered)", null, (sender, e) => ReplaceSelection(TxtRegex, @"\1", "", 1, 1)));
-            CmsRegex.Items.Add(new ToolStripMenuItem("Backreference (named)", null, (sender, e) => ReplaceSelection(TxtRegex, @"\k<", ">", 3)));
-
-            CmsReplaceWith.Items.Clear();
-            CmsReplaceWith.Items.Add(new ToolStripMenuItem("Substitution (numbered)", null, (sender, e) => ReplaceSelection(TxtReplaceWith, "$1", "", 1, 1), Keys.Control | Keys.S));
-            CmsReplaceWith.Items.Add(new ToolStripMenuItem("Substitution (named)", null, (sender, e) => ReplaceSelection(TxtReplaceWith, "${}", "", 2), Keys.Control | Keys.Shift | Keys.S));
-        }
-
-        private void ReplaceSelection(TextBox textBox, string left, string right, int selStart = 0, int selLength = 0)
-        {
-            string txt = textBox.Text;
-            var selectionStart = textBox.SelectionStart;
-            var selectionLength = textBox.SelectionLength;
-            //reihenfolge hier ist wichtig. zuerst rechts einfügen, dann links; sonst wird das Ende verschoben
-            txt = txt.Insert(selectionStart + selectionLength, right);
-            txt = txt.Insert(selectionStart, left);
-            textBox.Text = txt;
-            if (selStart == 0)
-            {
-                textBox.SelectionStart = selectionStart + selectionLength + left.Length + right.Length;
-            }
-            else
-            {
-                textBox.SelectionStart = selectionStart + selStart;
-            }
-            textBox.SelectionLength = selLength;
-            textBox.Focus();
         }
     }
 
