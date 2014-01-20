@@ -9,11 +9,13 @@ namespace RegexComposer
 {
     public partial class Form1 : Form
     {
+        readonly Color _errorColor = Color.FromArgb(255, 255, 199, 206);
+
         public Form1()
         {
             InitializeComponent();
             GrdMatches.AutoGenerateColumns = true;
-            ClbRegexOptions.Items.AddRange(new []
+            ClbRegexOptions.Items.AddRange(new[]
                                                {
                                                    new RegexOptionListBoxItem(RegexOptions.CultureInvariant),
                                                    new RegexOptionListBoxItem(RegexOptions.Singleline),
@@ -30,40 +32,58 @@ namespace RegexComposer
 
         private void ReMatchRegex()
         {
+            bool isMatch;
+            Regex r;
+            var isMatchColor = Color.LightGreen;
             try
             {
-                var selectedOptions = ClbRegexOptions.CheckedItems.Cast<RegexOptionListBoxItem>().Select(i => i.Option);
-                RegexOptions options = RegexOptions.None;
-                
-                if (selectedOptions.Count() >= 1)
-                    options = selectedOptions.First();
-                
-                if(selectedOptions.Count()> 1)
-                {
-                    foreach (var selectedOption in selectedOptions)
-                    {
-                        options = options | selectedOption;
-                    }
-                }
+                RegexOptions options = GetRegexOptions();
 
-                var r = new Regex(TxtRegex.Text, options );
-                bool isMatch = r.IsMatch(TxtInput.Text);
-
-                FillMatchesGrid(r);
-
-                var replaceWith = Regex.Unescape(TxtReplaceWith.Text);
-                TxtReplaced.Text = r.Replace(TxtInput.Text, replaceWith);
-
-                var isMatchColor = Color.LightGreen;
-                TxtRegex.BackColor = isMatch ? isMatchColor : Color.FromKnownColor(KnownColor.Window);
-                TxtError.Text = string.Empty;
+                r = new Regex(TxtRegex.Text, options);
+                isMatch = r.IsMatch(TxtInput.Text);
             }
             catch (Exception ex)
             {
-                var errorColor = Color.FromArgb(255, 255, 199, 206);
-                TxtRegex.BackColor = errorColor;
+                TxtRegex.BackColor = _errorColor;
                 TxtError.Text = ex.Message;
+                return;
             }
+            TxtRegex.BackColor = isMatch ? isMatchColor : Color.FromKnownColor(KnownColor.Window);
+
+            FillMatchesGrid(r);
+
+            try
+            {
+                var replaceWith = Regex.Unescape(TxtReplaceWith.Text);
+                TxtReplaced.Text = r.Replace(TxtInput.Text, replaceWith);
+            }
+            catch (Exception e)
+            {
+                TxtReplaceWith.BackColor = _errorColor;
+                TxtError.Text = e.Message;
+                return;
+            }
+
+            TxtReplaceWith.BackColor = Color.FromKnownColor(KnownColor.Window);
+            TxtError.Text = string.Empty;
+        }
+
+        private RegexOptions GetRegexOptions()
+        {
+            var selectedOptions = ClbRegexOptions.CheckedItems.Cast<RegexOptionListBoxItem>().Select(i => i.Option);
+            RegexOptions options = System.Text.RegularExpressions.RegexOptions.None;
+
+            if (selectedOptions.Count() >= 1)
+                options = selectedOptions.First();
+
+            if (selectedOptions.Count() > 1)
+            {
+                foreach (var selectedOption in selectedOptions)
+                {
+                    options = options | selectedOption;
+                }
+            }
+            return options;
         }
 
         private void FillMatchesGrid(Regex r)
@@ -73,7 +93,7 @@ namespace RegexComposer
             foreach (var groupName in r.GetGroupNames())
             {
                 dt.Columns.Add(groupName);
-            } 
+            }
             foreach (Match match in r.Matches(TxtInput.Text))
             {
                 //Spalten
@@ -292,7 +312,7 @@ namespace RegexComposer
 
         private void BtnRegexInsert_Click(object sender, EventArgs e)
         {
-            var btn = (Button) sender;
+            var btn = (Button)sender;
             RebuildContextMenuStrips();
             CmsRegex.Show(btn, new Point(0, btn.Height));
         }
