@@ -41,6 +41,7 @@
             this.label4 = new System.Windows.Forms.Label();
             this.TxtHelp = new System.Windows.Forms.TextBox();
             this.TxtReplaceWith = new System.Windows.Forms.TextBox();
+            this.CmsReplaceWith = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.label5 = new System.Windows.Forms.Label();
             this.TxtReplaced = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
@@ -51,7 +52,6 @@
             this.BtnRegexInsert = new System.Windows.Forms.Button();
             this.BtnReplaceInsert = new System.Windows.Forms.Button();
             this.SpcMainMatches = new System.Windows.Forms.SplitContainer();
-            this.CmsReplaceWith = new System.Windows.Forms.ContextMenuStrip(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.GrdMatches)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.MatchesBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.SpcRegexReplace)).BeginInit();
@@ -115,6 +115,8 @@
             this.TxtInput.Size = new System.Drawing.Size(390, 322);
             this.TxtInput.TabIndex = 1;
             this.TxtInput.TextChanged += new System.EventHandler(this.TxtText_TextChanged);
+            this.TxtInput.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TextBox_SuppressBing);
+            this.TxtInput.KeyUp += new System.Windows.Forms.KeyEventHandler(this.TextBox_SelectAll);
             // 
             // ClbRegexOptions
             // 
@@ -185,6 +187,11 @@
             this.TxtReplaceWith.TabIndex = 0;
             this.TxtReplaceWith.TextChanged += new System.EventHandler(this.TxtReplaceWith_TextChanged);
             // 
+            // CmsReplaceWith
+            // 
+            this.CmsReplaceWith.Name = "CmsReplaceWith";
+            this.CmsReplaceWith.Size = new System.Drawing.Size(61, 4);
+            // 
             // label5
             // 
             this.label5.AutoSize = true;
@@ -208,6 +215,8 @@
             this.TxtReplaced.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.TxtReplaced.Size = new System.Drawing.Size(355, 322);
             this.TxtReplaced.TabIndex = 11;
+            this.TxtReplaced.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TextBox_SuppressBing);
+            this.TxtReplaced.KeyUp += new System.Windows.Forms.KeyEventHandler(this.TextBox_SelectAll);
             // 
             // label6
             // 
@@ -334,11 +343,6 @@
             this.SpcMainMatches.MouseDown += new System.Windows.Forms.MouseEventHandler(this.SpcRegexReplace_MouseDown);
             this.SpcMainMatches.MouseMove += new System.Windows.Forms.MouseEventHandler(this.SpcRegexReplace_MouseMove);
             this.SpcMainMatches.MouseUp += new System.Windows.Forms.MouseEventHandler(this.SpcRegexReplace_MouseUp);
-            // 
-            // CmsReplaceWith
-            // 
-            this.CmsReplaceWith.Name = "CmsReplaceWith";
-            this.CmsReplaceWith.Size = new System.Drawing.Size(61, 4);
             // 
             // Form1
             // 

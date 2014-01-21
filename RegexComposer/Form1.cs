@@ -323,6 +323,32 @@ namespace RegexComposer
             RebuildContextMenuStrips();
             CmsReplaceWith.Show(btn, new Point(0, btn.Height));
         }
+
+        private void TextBox_SelectAll(object sender, KeyEventArgs e)
+        {
+            var textBox = sender as TextBox;
+            if(textBox == null)
+                return;
+
+            if (e.KeyData == (Keys.Control | Keys.A))
+            {
+                textBox.SelectAll();
+                e.Handled = true;
+            }
+        }
+
+        private void TextBox_SuppressBing(object sender, KeyEventArgs e)
+        {
+            var textBox = sender as TextBox;
+            if (textBox == null)
+                return;
+
+            if (e.KeyData == (Keys.Control | Keys.A))
+            {
+                //damit Windows kein Bing macht.
+                e.SuppressKeyPress = true;
+            }
+        }
     }
 
     public class RegexOptionListBoxItem
