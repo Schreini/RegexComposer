@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.label1 = new System.Windows.Forms.Label();
             this.TxtRegex = new System.Windows.Forms.TextBox();
             this.CmsRegex = new System.Windows.Forms.ContextMenuStrip(this.components);
@@ -111,9 +111,10 @@
             this.TxtInput.Location = new System.Drawing.Point(47, 26);
             this.TxtInput.Multiline = true;
             this.TxtInput.Name = "TxtInput";
-            this.TxtInput.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.TxtInput.ScrollBars = System.Windows.Forms.ScrollBars.Both;
             this.TxtInput.Size = new System.Drawing.Size(390, 322);
             this.TxtInput.TabIndex = 1;
+            this.TxtInput.WordWrap = false;
             this.TxtInput.TextChanged += new System.EventHandler(this.TxtText_TextChanged);
             this.TxtInput.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TextBox_SuppressBing);
             this.TxtInput.KeyUp += new System.Windows.Forms.KeyEventHandler(this.TextBox_SelectAll);
@@ -212,9 +213,10 @@
             this.TxtReplaced.Multiline = true;
             this.TxtReplaced.Name = "TxtReplaced";
             this.TxtReplaced.ReadOnly = true;
-            this.TxtReplaced.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.TxtReplaced.ScrollBars = System.Windows.Forms.ScrollBars.Both;
             this.TxtReplaced.Size = new System.Drawing.Size(355, 322);
             this.TxtReplaced.TabIndex = 11;
+            this.TxtReplaced.WordWrap = false;
             this.TxtReplaced.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TextBox_SuppressBing);
             this.TxtReplaced.KeyUp += new System.Windows.Forms.KeyEventHandler(this.TextBox_SelectAll);
             // 
@@ -249,14 +251,14 @@
             this.GrdMatches.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.GrdMatches.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.GrdMatches.DataSource = this.MatchesBindingSource;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Courier New", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.GrdMatches.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Courier New", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.GrdMatches.DefaultCellStyle = dataGridViewCellStyle1;
             this.GrdMatches.Location = new System.Drawing.Point(78, 3);
             this.GrdMatches.Name = "GrdMatches";
             this.GrdMatches.ReadOnly = true;
