@@ -21,6 +21,7 @@ namespace RegexComposer
                                                    new RegexOptionListBoxItem(RegexOptions.Singleline),
                                                    new RegexOptionListBoxItem(RegexOptions.Multiline),
                                                    new RegexOptionListBoxItem(RegexOptions.IgnoreCase),
+                                                   new RegexOptionListBoxItem(RegexOptions.Compiled)
                                                });
             RebuildContextMenuStrips();
         }
@@ -35,6 +36,12 @@ namespace RegexComposer
             bool isMatch;
             Regex r;
             var isMatchColor = Color.LightGreen;
+            if (TxtRegex.Text.Length == 0)
+            {
+                MatchesBindingSource.DataSource = new DataTable();
+                TxtReplaced.Clear();
+                return;
+            }
             try
             {
                 RegexOptions options = GetRegexOptions();

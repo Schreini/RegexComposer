@@ -109,6 +109,7 @@
             this.TxtInput.Font = new System.Drawing.Font("Courier New", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TxtInput.HideSelection = false;
             this.TxtInput.Location = new System.Drawing.Point(47, 26);
+            this.TxtInput.MaxLength = 999999;
             this.TxtInput.Multiline = true;
             this.TxtInput.Name = "TxtInput";
             this.TxtInput.ScrollBars = System.Windows.Forms.ScrollBars.Both;
