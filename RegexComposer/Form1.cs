@@ -10,6 +10,10 @@ namespace RegexComposer
     public partial class Form1 : Form
     {
         readonly Color _errorColor = Color.FromArgb(255, 255, 199, 206);
+        private Regex _theRegex;
+        private int _regexHash;
+        readonly Color _isMatchColor = Color.LightGreen;
+
 
         public Form1()
         {
@@ -34,8 +38,6 @@ namespace RegexComposer
         private void ReMatchRegex()
         {
             bool isMatch;
-            Regex r;
-            var isMatchColor = Color.LightGreen;
             if (TxtRegex.Text.Length == 0)
             {
                 MatchesBindingSource.DataSource = new DataTable();
@@ -44,10 +46,15 @@ namespace RegexComposer
             }
             try
             {
-                RegexOptions options = GetRegexOptions();
+                var options = GetRegexOptions();
+                var newHash = CombineRegexAndOptionsHash();
 
-                r = new Regex(TxtRegex.Text, options);
-                isMatch = r.IsMatch(TxtInput.Text);
+                if (newHash != _regexHash)
+                {
+                    _theRegex = new Regex(TxtRegex.Text, options | RegexOptions.Compiled);
+                    _regexHash = newHash;
+                }
+                isMatch = _theRegex.IsMatch(TxtInput.Text);
             }
             catch (Exception ex)
             {
@@ -55,14 +62,14 @@ namespace RegexComposer
                 TxtError.Text = ex.Message;
                 return;
             }
-            TxtRegex.BackColor = isMatch ? isMatchColor : Color.FromKnownColor(KnownColor.Window);
+            TxtRegex.BackColor = isMatch ? _isMatchColor : Color.FromKnownColor(KnownColor.Window);
 
-            FillMatchesGrid(r);
+            FillMatchesGrid(_theRegex);
 
             try
             {
                 var replaceWith = Regex.Unescape(TxtReplaceWith.Text);
-                TxtReplaced.Text = r.Replace(TxtInput.Text, replaceWith);
+                TxtReplaced.Text = _theRegex.Replace(TxtInput.Text, replaceWith);
             }
             catch (Exception e)
             {
@@ -356,6 +363,17 @@ namespace RegexComposer
                 e.SuppressKeyPress = true;
             }
         }
+
+        private int CombineRegexAndOptionsHash()
+        {
+            unchecked
+            {
+                int hash = 17;
+                hash = hash * 31 + TxtRegex.Text.GetHashCode();
+                hash = hash * 31 + GetRegexOptions().GetHashCode();
+                return hash;
+            }
+        }
     }
 
     public class RegexOptionListBoxItem
@@ -373,5 +391,6 @@ namespace RegexComposer
         {
             return Name;
         }
+
     }
 }
