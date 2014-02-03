@@ -37,49 +37,67 @@ namespace RegexComposer
 
         private void ReMatchRegex()
         {
-            bool isMatch;
-            if (TxtRegex.Text.Length == 0)
-            {
-                MatchesBindingSource.DataSource = new DataTable();
-                TxtReplaced.Clear();
-                return;
-            }
+            LogExecTime x = null;
             try
             {
-                var options = GetRegexOptions();
-                var newHash = CombineRegexAndOptionsHash();
-
-                if (newHash != _regexHash)
+                x = new LogExecTime("ALL").Start();
+                bool isMatch;
+                if (TxtRegex.Text.Length == 0)
                 {
-                    _theRegex = new Regex(TxtRegex.Text, options | RegexOptions.Compiled);
-                    _regexHash = newHash;
+                    var a = new LogExecTime("ResetGrid").Start();
+                    MatchesBindingSource.DataSource = new DataTable();
+                    TxtReplaced.Clear();
+                    a.Stop();
+                    return;
                 }
-                isMatch = _theRegex.IsMatch(TxtInput.Text);
-            }
-            catch (Exception ex)
-            {
-                TxtRegex.BackColor = _errorColor;
-                TxtError.Text = ex.Message;
-                return;
-            }
-            TxtRegex.BackColor = isMatch ? _isMatchColor : Color.FromKnownColor(KnownColor.Window);
+                try
+                {
+                    var a = new LogExecTime("hashhash").Start();
+                    var options = GetRegexOptions();
+                    var newHash = CombineRegexAndOptionsHash();
+                    a.Stop();
 
-            FillMatchesGrid(_theRegex);
+                    if (newHash != _regexHash)
+                    {
+                        var b = new LogExecTime("CalcRegex").Start();
+                        _theRegex = new Regex(TxtRegex.Text, options | RegexOptions.Compiled);
+                        _regexHash = newHash;
+                        b.Stop();
+                    }
+                    isMatch = _theRegex.IsMatch(TxtInput.Text);
+                }
+                catch (Exception ex)
+                {
+                    TxtRegex.BackColor = _errorColor;
+                    TxtError.Text = ex.Message;
+                    return;
+                }
+                TxtRegex.BackColor = isMatch ? _isMatchColor : Color.FromKnownColor(KnownColor.Window);
 
-            try
-            {
-                var replaceWith = Regex.Unescape(TxtReplaceWith.Text);
-                TxtReplaced.Text = _theRegex.Replace(TxtInput.Text, replaceWith);
-            }
-            catch (Exception e)
-            {
-                TxtReplaceWith.BackColor = _errorColor;
-                TxtError.Text = e.Message;
-                return;
-            }
+                FillMatchesGrid(_theRegex);
 
-            TxtReplaceWith.BackColor = Color.FromKnownColor(KnownColor.Window);
-            TxtError.Text = string.Empty;
+                var c = new LogExecTime("ReplaceStuff").Start();
+                try
+                {
+                    var replaceWith = Regex.Unescape(TxtReplaceWith.Text);
+                    TxtReplaced.Text = _theRegex.Replace(TxtInput.Text, replaceWith);
+                }
+                catch (Exception e)
+                {
+                    TxtReplaceWith.BackColor = _errorColor;
+                    TxtError.Text = e.Message;
+                    c.Stop();
+                    return;
+                }
+
+                TxtReplaceWith.BackColor = Color.FromKnownColor(KnownColor.Window);
+                TxtError.Text = string.Empty;
+                c.Stop();
+            }
+            finally
+            {
+                x.Stop();
+            }
         }
 
         private RegexOptions GetRegexOptions()
