@@ -84,6 +84,7 @@
             this.TxtRegex.Name = "TxtRegex";
             this.TxtRegex.Size = new System.Drawing.Size(363, 20);
             this.TxtRegex.TabIndex = 0;
+            this.TxtRegex.Text = "(a(1[^10]+0)+x)";
             this.TxtRegex.TextChanged += new System.EventHandler(this.TxtRegex_TextChanged);
             // 
             // CmsRegex
@@ -265,6 +266,7 @@
             this.GrdMatches.ReadOnly = true;
             this.GrdMatches.Size = new System.Drawing.Size(969, 160);
             this.GrdMatches.TabIndex = 15;
+            this.GrdMatches.Scroll += new System.Windows.Forms.ScrollEventHandler(this.GrdMatches_Scroll);
             // 
             // SpcRegexReplace
             // 

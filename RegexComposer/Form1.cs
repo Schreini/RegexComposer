@@ -102,6 +102,7 @@ namespace RegexComposer
 
         private void FillMatchesGrid(Regex r)
         {
+            var let = new LogExecTime("FillMatchesGridd").Start();
             var dt = new DataTable();
             //Zeilen
             foreach (var groupName in r.GetGroupNames())
@@ -125,8 +126,14 @@ namespace RegexComposer
 
                 dt.Rows.Add(row);
             }
-
+            let.Stop();
+            GrdMatches.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.None;
+            GrdMatches.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.None;
+            var let2 = new LogExecTime("DataBindingMatchesGrid").Start();
             MatchesBindingSource.DataSource = dt;
+            GrdMatches.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.DisplayedCells);
+            GrdMatches.AutoResizeRows(DataGridViewAutoSizeRowsMode.DisplayedCells);
+            let2.Stop();
         }
 
         private void RebuildContextMenuStrips()
@@ -373,6 +380,12 @@ namespace RegexComposer
                 hash = hash * 31 + GetRegexOptions().GetHashCode();
                 return hash;
             }
+        }
+
+        private void GrdMatches_Scroll(object sender, ScrollEventArgs e)
+        {
+            GrdMatches.AutoResizeRows(DataGridViewAutoSizeRowsMode.DisplayedCells);
+            GrdMatches.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.DisplayedCells);
         }
     }
 
