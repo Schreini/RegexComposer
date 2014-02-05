@@ -30,6 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.label1 = new System.Windows.Forms.Label();
             this.TxtRegex = new System.Windows.Forms.TextBox();
             this.CmsRegex = new System.Windows.Forms.ContextMenuStrip(this.components);
@@ -84,7 +85,6 @@
             this.TxtRegex.Name = "TxtRegex";
             this.TxtRegex.Size = new System.Drawing.Size(363, 20);
             this.TxtRegex.TabIndex = 0;
-            this.TxtRegex.Text = "(a(1[^10]+0)+x)";
             this.TxtRegex.TextChanged += new System.EventHandler(this.TxtRegex_TextChanged);
             // 
             // CmsRegex
@@ -357,6 +357,7 @@
             this.Controls.Add(this.SpcMainMatches);
             this.Controls.Add(this.TxtError);
             this.Controls.Add(this.label3);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form1";
             this.Text = "Regex Composer";
             ((System.ComponentModel.ISupportInitialize)(this.GrdMatches)).EndInit();
