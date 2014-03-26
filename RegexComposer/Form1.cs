@@ -162,6 +162,8 @@ namespace RegexComposer
             CmsRegex.Items.Add(new ToolStripSeparator());
             CmsRegex.Items.Add(new ToolStripMenuItem("Backreference (numbered)", null, (sender, e) => ReplaceSelection(TxtRegex, @"\1", "", 1, 1), Keys.Control | Keys.B));
             CmsRegex.Items.Add(new ToolStripMenuItem("Backreference (named)", null, (sender, e) => ReplaceSelection(TxtRegex, @"\k<", ">", 3), Keys.Control | Keys.Shift | Keys.B));
+            CmsRegex.Items.Add(new ToolStripSeparator());
+            CmsRegex.Items.Add(new ToolStripMenuItem("Decimal digit", null, (sender, e) => ReplaceSelection(TxtRegex, @"\d", ""), Keys.Control | Keys.D));
 
             CmsReplaceWith.Items.Clear();
             CmsReplaceWith.Items.Add(new ToolStripMenuItem("Substitution (numbered)", null, (sender, e) => ReplaceSelection(TxtReplaceWith, "$1", "", 1, 1), Keys.Control | Keys.S));
