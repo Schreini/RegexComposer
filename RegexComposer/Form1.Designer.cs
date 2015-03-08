@@ -68,7 +68,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(3, 3);
+            this.label1.Location = new System.Drawing.Point(170, 5);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(38, 13);
             this.label1.TabIndex = 0;
@@ -81,9 +81,9 @@
             this.TxtRegex.ContextMenuStrip = this.CmsRegex;
             this.TxtRegex.Font = new System.Drawing.Font("Courier New", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TxtRegex.HideSelection = false;
-            this.TxtRegex.Location = new System.Drawing.Point(47, 0);
+            this.TxtRegex.Location = new System.Drawing.Point(245, 2);
             this.TxtRegex.Name = "TxtRegex";
-            this.TxtRegex.Size = new System.Drawing.Size(363, 20);
+            this.TxtRegex.Size = new System.Drawing.Size(778, 20);
             this.TxtRegex.TabIndex = 0;
             this.TxtRegex.TextChanged += new System.EventHandler(this.TxtRegex_TextChanged);
             // 
@@ -96,7 +96,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(3, 29);
+            this.label2.Location = new System.Drawing.Point(0, 9);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(31, 13);
             this.label2.TabIndex = 2;
@@ -109,12 +109,12 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.TxtInput.Font = new System.Drawing.Font("Courier New", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TxtInput.HideSelection = false;
-            this.TxtInput.Location = new System.Drawing.Point(47, 26);
+            this.TxtInput.Location = new System.Drawing.Point(3, 25);
             this.TxtInput.MaxLength = 999999999;
             this.TxtInput.Multiline = true;
             this.TxtInput.Name = "TxtInput";
             this.TxtInput.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.TxtInput.Size = new System.Drawing.Size(390, 322);
+            this.TxtInput.Size = new System.Drawing.Size(434, 269);
             this.TxtInput.TabIndex = 1;
             this.TxtInput.WordWrap = false;
             this.TxtInput.TextChanged += new System.EventHandler(this.TxtText_TextChanged);
@@ -184,9 +184,9 @@
             this.TxtReplaceWith.ContextMenuStrip = this.CmsReplaceWith;
             this.TxtReplaceWith.Font = new System.Drawing.Font("Courier New", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TxtReplaceWith.HideSelection = false;
-            this.TxtReplaceWith.Location = new System.Drawing.Point(78, 0);
+            this.TxtReplaceWith.Location = new System.Drawing.Point(245, 28);
             this.TxtReplaceWith.Name = "TxtReplaceWith";
-            this.TxtReplaceWith.Size = new System.Drawing.Size(328, 20);
+            this.TxtReplaceWith.Size = new System.Drawing.Size(778, 20);
             this.TxtReplaceWith.TabIndex = 0;
             this.TxtReplaceWith.TextChanged += new System.EventHandler(this.TxtReplaceWith_TextChanged);
             // 
@@ -198,7 +198,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(3, 3);
+            this.label5.Location = new System.Drawing.Point(170, 31);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(69, 13);
             this.label5.TabIndex = 10;
@@ -211,13 +211,13 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.TxtReplaced.Font = new System.Drawing.Font("Courier New", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TxtReplaced.HideSelection = false;
-            this.TxtReplaced.Location = new System.Drawing.Point(78, 26);
+            this.TxtReplaced.Location = new System.Drawing.Point(3, 25);
             this.TxtReplaced.MaxLength = 999999999;
             this.TxtReplaced.Multiline = true;
             this.TxtReplaced.Name = "TxtReplaced";
             this.TxtReplaced.ReadOnly = true;
             this.TxtReplaced.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.TxtReplaced.Size = new System.Drawing.Size(355, 322);
+            this.TxtReplaced.Size = new System.Drawing.Size(430, 269);
             this.TxtReplaced.TabIndex = 11;
             this.TxtReplaced.WordWrap = false;
             this.TxtReplaced.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TextBox_SuppressBing);
@@ -226,7 +226,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(3, 29);
+            this.label6.Location = new System.Drawing.Point(3, 6);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(53, 13);
             this.label6.TabIndex = 12;
@@ -274,25 +274,19 @@
             this.SpcRegexReplace.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.SpcRegexReplace.Location = new System.Drawing.Point(170, 3);
+            this.SpcRegexReplace.Location = new System.Drawing.Point(170, 54);
             this.SpcRegexReplace.Name = "SpcRegexReplace";
             // 
             // SpcRegexReplace.Panel1
             // 
-            this.SpcRegexReplace.Panel1.Controls.Add(this.BtnRegexInsert);
             this.SpcRegexReplace.Panel1.Controls.Add(this.TxtInput);
-            this.SpcRegexReplace.Panel1.Controls.Add(this.label1);
-            this.SpcRegexReplace.Panel1.Controls.Add(this.TxtRegex);
             this.SpcRegexReplace.Panel1.Controls.Add(this.label2);
             // 
             // SpcRegexReplace.Panel2
             // 
-            this.SpcRegexReplace.Panel2.Controls.Add(this.BtnReplaceInsert);
             this.SpcRegexReplace.Panel2.Controls.Add(this.TxtReplaced);
-            this.SpcRegexReplace.Panel2.Controls.Add(this.TxtReplaceWith);
-            this.SpcRegexReplace.Panel2.Controls.Add(this.label5);
             this.SpcRegexReplace.Panel2.Controls.Add(this.label6);
-            this.SpcRegexReplace.Size = new System.Drawing.Size(880, 348);
+            this.SpcRegexReplace.Size = new System.Drawing.Size(880, 297);
             this.SpcRegexReplace.SplitterDistance = 440;
             this.SpcRegexReplace.TabIndex = 16;
             this.SpcRegexReplace.Paint += new System.Windows.Forms.PaintEventHandler(this.SpcRegexReplace_Paint);
@@ -303,7 +297,7 @@
             // BtnRegexInsert
             // 
             this.BtnRegexInsert.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.BtnRegexInsert.Location = new System.Drawing.Point(416, -1);
+            this.BtnRegexInsert.Location = new System.Drawing.Point(1029, 0);
             this.BtnRegexInsert.Name = "BtnRegexInsert";
             this.BtnRegexInsert.Size = new System.Drawing.Size(25, 22);
             this.BtnRegexInsert.TabIndex = 3;
@@ -314,7 +308,7 @@
             // BtnReplaceInsert
             // 
             this.BtnReplaceInsert.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.BtnReplaceInsert.Location = new System.Drawing.Point(412, -1);
+            this.BtnReplaceInsert.Location = new System.Drawing.Point(1029, 26);
             this.BtnReplaceInsert.Name = "BtnReplaceInsert";
             this.BtnReplaceInsert.Size = new System.Drawing.Size(25, 22);
             this.BtnReplaceInsert.TabIndex = 4;
@@ -333,8 +327,14 @@
             // 
             // SpcMainMatches.Panel1
             // 
+            this.SpcMainMatches.Panel1.Controls.Add(this.BtnReplaceInsert);
+            this.SpcMainMatches.Panel1.Controls.Add(this.BtnRegexInsert);
+            this.SpcMainMatches.Panel1.Controls.Add(this.TxtRegex);
+            this.SpcMainMatches.Panel1.Controls.Add(this.TxtReplaceWith);
             this.SpcMainMatches.Panel1.Controls.Add(this.TxtHelp);
+            this.SpcMainMatches.Panel1.Controls.Add(this.label5);
             this.SpcMainMatches.Panel1.Controls.Add(this.SpcRegexReplace);
+            this.SpcMainMatches.Panel1.Controls.Add(this.label1);
             this.SpcMainMatches.Panel1.Controls.Add(this.ClbRegexOptions);
             this.SpcMainMatches.Panel1.Controls.Add(this.label4);
             // 
