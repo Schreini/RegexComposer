@@ -132,7 +132,6 @@ namespace RegexComposer
                 //Spalten
                 var row = dt.NewRow();
 
-                r.GetGroupNumbers();
                 row.ItemArray = match.Groups.Cast<Group>().Select(g => g.Value).ToArray();
 
                 //row.ItemArray =
